@@ -30,4 +30,14 @@ echo
 ifconfig | grep ether
 echo
 
+
+#flushare il cache di dns
+
+systemd-resolve --statistics
+echo
+
+systemd-resolve --flush-cache
+echo ==========================
+systemd-resolve --statistics
+
 exit
