@@ -10,8 +10,13 @@ echo "Devi essere root per eseguire questo script."
 exit $E_NONROOT
 fi
 
+
+
+ifconfig > ifconfig.txt
+
+
 #stampa il mac address attuale
-ifconfig | grep ether
+cat ifconfig.txt | tail | grep ether 
 echo 
 
 
