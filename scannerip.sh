@@ -68,6 +68,7 @@ funzione_principale()
             echo -e "\nOnly these ip addresses are online\n"
             cat ip.txt | grep "64[^*]" | cut -d ' ' -f 4 | cut -d ':' -f 1 | sort -u
 
+            rm ip.txt sub.txt iploc.txt > /dev/null 2>&1
 
             ;;
          [nN][oO]|[nN])
