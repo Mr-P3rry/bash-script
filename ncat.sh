@@ -20,7 +20,8 @@ progress(){
 progress &
 MYSELF=$!
 ports="$(nmap -sV -O $ip -p1-65535 > scan.txt)"
-kill $MYSELF >/dev/null 2>&1
+kill $MYSELF
+wait $MYSELF>/dev/null 2>&1
 echo -n "...done."
 echo
 
