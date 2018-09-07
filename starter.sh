@@ -62,6 +62,10 @@ banner(){
                     read text1
                     echo -en "your banner will look like this\n"
                     echo -en "$(tput setaf 3)$(figlet $text1)$(tput setaf 0)"
+                    echo -en "\n"
+                    echo 'echo -ne "\n$(tput setaf 4)$(cowsay -f eyes $USER_custom_test)$(tput setaf 0)\n"' > code.txt
+                    cat code.txt | sed -e 's/$USER_custom_test/'$text2'/g' >> /root/.bashrc
+
                     ;;
 
                 2)
@@ -169,6 +173,7 @@ case $input in
             echo -e "$(tput setaf 2)[+]$(tput sgr 0)Done\t\t: GitHub is already installed"
 
             ##I recall the main funtion where github is already installed
+            ## main è stato commentato quindi non viene letto uncomment this late <--------------------------------->
             #main
             banner
             fi
