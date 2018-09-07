@@ -52,32 +52,75 @@ banner(){
         case $ban in
             [yY][eE][sS]|[yY])
 
-                read -r -p "What type of banner do you want to use $(tput setaf 3)ASCII$(tput sgr 0) o $(tput setaf 4)Graphical ASCII$(tput sgr 0)[1/2]" Question
+                read -r -p "What type of banner do you want to use $(tput setaf 3)ASCII$(tput sgr 0) o $(tput setaf 4)Graphical ASCII$(tput sgr 0) [1/2]" Question
                 case $Question in
 
                 1)
+
+
                     echo "$(tput setaf 2)[+]$(tput sgr 0) You sceleted only ASCII"
                     apt-get install figlet -y &>/dev/null
-                    echo -en "What do you want to write in your banner: "
-                    read text1
-                    echo -en "your banner will look like this\n"
-                    echo -en "$(tput setaf 3)$(figlet $text1)$(tput setaf 0)"
-                    echo -en "\n"
-                    echo 'echo -ne "\n$(tput setaf 4)$(cowsay -f eyes $USER_custom_test)$(tput setaf 0)\n"' > code.txt
-                    cat code.txt | sed -e 's/$USER_custom_test/'$text2'/g' >> /root/.bashrc
 
+                    ##############################################################################
+                    #choose color
+                    ##############################################################################
+
+                    for color in {22..231} ; do # Colors
+                    # Display the color
+                    printf "\e[48;5;%sm  %3s  \e[0m" $color $color
+                    # Display 6 colors per lines
+                    if [ $((($color + 1) % 6)) == 4 ] ; then
+                    echo # New line
+                    fi
+                    done
+                    echo # New line
+
+                    echo -ne "select a color:"
+                    read num
+                    printf "\e[38;5;%sm  %3s \e[0m " $num $num
+                    echo # New Line
+
+                    echo -en "What do you want to write in your banner: "
+                    read text2
+                    echo -en "your banner will look like this\n"
+                    printf "\e[38;5;%sm $(figlet $text2) \e[0m" $num
+                    echo -en "\n"
+                    echo 'printf "\e[38;5;%ChangeHerem $(figlet banner) \e[0m";echo' > code.txt
+                    cat code.txt | sed -e 's/%ChangeHere/'$num'/g;s/banner/'$text2'/g' >> /root/.bashrc
                     ;;
 
                 2)
                     echo "$(tput setaf 2)[+]$(tput sgr 0) You selected grafical ASCII"
                     apt-get install cowsay -y &>/dev/null
+
+
+                    #########################################################################################
+                    #choose color
+                    #########################################################################################
+
+                    for color in {22..231} ; do # Colors
+                            # Display the color
+                            printf "\e[48;5;%sm  %3s  \e[0m" $color $color
+                                # Display 6 colors per lines
+                                if [ $((($color + 1) % 6)) == 4 ] ; then
+                                        echo # New line
+                                    fi
+                                done
+                                echo # New line
+
+                                echo -ne "select a color:"
+                                read num
+                                printf "\e[38;5;%sm  %3s \e[0m " $num $num
+                                echo # New Line
+
+
                     echo -en "What do you want to write in your banner: "
                     read text2
                     echo -en "your banner will look like this\n"
-                    echo -en "$(tput setaf 4)$(cowsay -f eyes $text2)$(tput setaf 0)"
+                    printf "\e[38;5;%sm $(cowsay -f eyes $text2) \e[0m" $num
                     echo -en "\n"
-                    echo 'echo -ne "\n$(tput setaf 4)$(cowsay -f eyes $USER_custom_test)$(tput setaf 0)\n"' > code.txt
-                    cat code.txt | sed -e 's/$USER_custom_test/'$text2'/g' >> /root/.bashrc
+                    echo 'printf "\e[38;5;%ChangeHerem $(cowsay -f eyes banner) \e[0m";echo' > code.txt
+                    cat code.txt | sed -e 's/%ChangeHere/'$num'/g;s/banner/'$text2'/g' >> /root/.bashrc
 
 
 
@@ -174,7 +217,7 @@ case $input in
 
             ##I recall the main funtion where github is already installed
             ## main è stato commentato quindi non viene letto uncomment this late <--------------------------------->
-            #main
+            main
             banner
             fi
         ;;
