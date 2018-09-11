@@ -1,4 +1,4 @@
-# [Markdown Edit](http://georgeosddev.github.com/markdown-edit)
+# [MR-P3rry](https://github.com/Mr-P3rry)
 
 This is a online markdown editor/viewer.<br>
 This help you to edit markdown document with the power of web technology.
